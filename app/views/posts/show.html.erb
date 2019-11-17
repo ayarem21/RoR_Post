@@ -3,7 +3,8 @@
 <div class="alert alert-primary">
   <p>
     <strong>Name:</strong>
-    <%= @post.name %>
+    <%= Author.find(@post.author_id).first_name %>
+    <%= Author.find(@post.author_id).last_name %>
   </p>
 
   <p>

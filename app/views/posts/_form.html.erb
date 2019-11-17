@@ -10,10 +10,10 @@
       </ul>
     </div>
   <% end %>
-  <div class="form-group">
-    <div class="field">
-      <%= form.label :name%>
-      <%= form.text_field :name, class:"form-control" %>
+
+
+    <div class="dropdown">
+      <%= form.collection_select :author_id, @authors, :id, :first_name,{}, class: "form-control"  %>
     </div>
 
     <div class="field">
@@ -27,7 +27,7 @@
     </div>
 
     <div class="actions">
-      <%= form.submit :Submit, class:"btn btn-dark"%>
+      <%= form.submit :submit, class:"btn btn-dark"%>
     </div>
-  </div>
+    <br>
 <% end %>

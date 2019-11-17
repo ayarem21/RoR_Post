@@ -17,7 +17,7 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= post.name %></td>
+        <td><%= Author.find(post.author_id).first_name %> <%= Author.find(post.author_id).last_name %></td>
         <td><%= post.title %></td>
         <td><%= post.content %></td>
         <td><%= link_to 'Show', post, class:"btn btn-outline-success" %></td>
