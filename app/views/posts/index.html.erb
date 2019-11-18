@@ -20,6 +20,7 @@
         <td><%= Author.find(post.author_id).first_name %> <%= Author.find(post.author_id).last_name %></td>
         <td><%= post.title %></td>
         <td><%= post.content %></td>
+
         <td><%= link_to 'Show', post, class:"btn btn-outline-success" %></td>
         <td><%= link_to 'Edit', edit_post_path(post), class:"btn btn-outline-warning"%></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger"%></td>
