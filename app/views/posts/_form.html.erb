@@ -17,22 +17,20 @@
     </div>
 
     <div class="field">
-      <%= form.label :title %>
+      <%= form.label :'Title:' %>
       <%= form.text_field :title, class:"form-control" %>
     </div>
 
     <div class="field">
-      <%= form.label :content %>
+      <%= form.label :'Content:' %>
       <%= form.text_area :content, class:"form-control" %>
     </div>
 
     <div>
-      <%= form.label :file %>
-      <%= form.file_field :file %>
+      <%= form.label :'Add image:' %>
+      <%= form.file_field :file, class:"btn btn-primary" %>
     </div>
-
-    <div class="actions">
-      <%= form.submit :submit, class:"btn btn-dark"%>
-    </div>
+    <br>
+    <%= form.submit :Submit, class:"btn btn-dark"%>
     <br>
 <% end %>
