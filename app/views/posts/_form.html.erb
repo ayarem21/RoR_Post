@@ -26,6 +26,11 @@
       <%= form.text_area :content, class:"form-control" %>
     </div>
 
+    <div>
+      <%= form.label :file %>
+      <%= form.file_field :file %>
+    </div>
+
     <div class="actions">
       <%= form.submit :submit, class:"btn btn-dark"%>
     </div>

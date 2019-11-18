@@ -3,7 +3,7 @@
 <div class="alert alert-primary">
   <h1>Posts</h1>
 </div>
-
+<script src="https://kit.fontawesome.com/cea9c7549d.js" crossorigin="anonymous"></script>
 <table class="table">
   <thead>
     <tr>
@@ -17,13 +17,13 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= Author.find(post.author_id).first_name %> <%= Author.find(post.author_id).last_name %></td>
+        <td><%= full_name(post) %> </td>
         <td><%= post.title %></td>
         <td><%= post.content %></td>
 
-        <td><%= link_to 'Show', post, class:"btn btn-outline-success" %></td>
-        <td><%= link_to 'Edit', edit_post_path(post), class:"btn btn-outline-warning"%></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger"%></td>
+        <td><%= link_to 'Show', post, class:"btn btn-outline-success" %>
+          <%= link_to 'Edit', edit_post_path(post), class:"btn btn-outline-warning"%>
+          <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger"%></td>
       </tr>
     <% end %>
   </tbody>
@@ -31,4 +31,4 @@
 <!-- -->
 <br>
 
-<%= link_to 'New Post', new_post_path, class: "btn btn-primary"%>
+<%= link_to '', new_post_path, class: "fas fa-poo"%>

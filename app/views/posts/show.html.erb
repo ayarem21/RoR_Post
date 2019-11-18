@@ -3,8 +3,9 @@
 <div class="alert alert-primary">
   <p>
     <strong>Name:</strong>
-    <%= Author.find(@post.author_id).first_name %>
-    <%= Author.find(@post.author_id).last_name %>
+    <%= full_name(@post) %>
+    <%#= Author.find(@post.author_id).first_name %>
+    <%#= Author.find(@post.author_id).last_name %>
   </p>
 
   <p>
@@ -15,6 +16,17 @@
   <p>
     <strong>Content:</strong>
     <%= @post.content %>
+  </p>
+
+  <p>
+    <strong>Image:</strong>
+    <p><%= image_tag @post.file, width: '75%'%>
+    </p>
+  </p>
+
+  <p>
+<!--    <strong>Post was created in <%#= @post.created_at.strftime("%R %m/%d/%Y") %><%#= distance_of_time_in_words(Time.now.hour.minute, Time.now.hour.minute - @post.created_at.hour.minute) %></strong>-->
+    <%= distance_of_time_in_words(Time.now.hour, Time.now-@post.created_at) %>
   </p>
 </div>
 <%= link_to 'Edit', edit_post_path(@post), class:"btn btn-warning"%>
