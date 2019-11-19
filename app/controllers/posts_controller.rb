@@ -4,13 +4,12 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
-
+    @posts = Post.all.order('updated_at').reverse
   end
 
   # GET /posts/1
   # GET /posts/1.json
-  def show
+  def show;
   end
 
   # GET /posts/new
@@ -72,7 +71,9 @@ class PostsController < ApplicationController
     def set_post
       @post = Post.find(params[:id])
     end
-
+    # def visit_count_add
+    #   params.require(:post).permit(:visit_count)
+    # end
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:author_id, :title, :content, :file)
