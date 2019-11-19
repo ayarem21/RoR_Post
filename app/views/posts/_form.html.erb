@@ -13,7 +13,8 @@
 
 
     <div class="dropdown">
-      <%= form.collection_select :author_id, @authors, :id, :first_name,{}, class: "form-control"  %>
+      <%#= form.collection_select :author_id, @authors, :id, :first_name,{}, class: "form-control"  %>
+      <%= form.select :author_id, Author.pluck(:last_name, :id ),{}, class: "form-control" %>
     </div>
 
     <div class="field">

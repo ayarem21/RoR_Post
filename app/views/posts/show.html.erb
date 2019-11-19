@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<p class="alert alert-primary", id="notice"><%= notice %></p>
 
 <div class="alert alert-primary">
   <p>
@@ -28,41 +28,42 @@
   <p>
     <strong>It was created <%= distance_of_time_in_words(Time.now.hour, Time.now-@post.created_at) %> ago.<strong>
   </p>
-</div>
-<%= link_to 'Edit', edit_post_path(@post), class:"btn btn-warning"%>
-<%= link_to 'Back', posts_path, class:"btn btn-secondary"%>
+  <%= link_to 'Edit', edit_post_path(@post), class:"btn btn-warning"%>
+  <%= link_to 'Back', posts_path, class:"btn btn-secondary"%>
 
-<br>
-<br>
-<br>
+  <br>
+  <br>
+  <br>
 
-<h3>All comments</h3>
+  <h3>All comments</h3>
   <% @post.comments.each do |comment| %>
-  <div class="alert alert-light">
-    <p><strong><%= comment.username %></strong>: <%= comment.body %>
-    </p>
-  </div>
-<% end %>
+    <div class="alert alert-light">
+      <p><strong><%= comment.username %></strong>: <%= comment.body %>
+      </p>
+    </div>
+  <% end %>
 
-<br>
-<br>
-<br>
-
-<h3>Add comments</h3>
-<%= form_for([@post, @post.comments.build]) do |form| %>
-
-  <div class="field">
-    <%= form.label :Username %>
-    <%= form.text_field :username, class:"form-control" %>
-  </div>
-
-  <div class="field">
-    <%= form.label :'Text of comment' %>
-    <%= form.text_area :body, class:"form-control" %>
-  </div>
   <br>
-  <div class="actions">
-    <%= form.submit :'Add Comment', class:"btn btn-warning"%>
-  </div>
   <br>
+  <br>
+
+  <h3>Add comments</h3>
+  <%= form_for([@post, @post.comments.build]) do |form| %>
+
+    <div class="field">
+      <%= form.label :Username %>
+      <%= form.text_field :username, class:"form-control" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :'Text of comment' %>
+      <%= form.text_area :body, class:"form-control" %>
+    </div>
+    <br>
+    <div class="actions">
+      <%= form.submit :'Add Comment', class:"btn btn-warning"%>
+    </div>
+    <br>
+</div>
+
 <% end %>

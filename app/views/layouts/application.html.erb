@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
+<script src="https://kit.fontawesome.com/cea9c7549d.js" crossorigin="anonymous"></script>
   <head>
-    <title>RoRBlog</title>
+    <nav class="navbar navbar-light bg-primary", style = "border-radius: 5px">
+      <a class="navbar-brand" href="http://localhost:3000">
+        <i class="fab fa-accessible-icon"></i>
+        Blog
+      </a>
+    </nav>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -13,5 +19,6 @@
     <div class="container">
       <%= yield %>
     </div>
+
   </body>
 </html>
