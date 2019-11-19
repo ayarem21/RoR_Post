@@ -9,7 +9,8 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   # GET /posts/1.json
-  def show;
+  def show
+    impressionist @post
   end
 
   # GET /posts/new
@@ -82,4 +83,5 @@ class PostsController < ApplicationController
     def set_author
       @authors = Author.all
     end
+
 end
