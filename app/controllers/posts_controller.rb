@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: %i[:edit :update :destroy]
 
   # GET /posts
   # GET /posts.json
@@ -27,7 +28,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -42,7 +43,6 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
@@ -77,11 +77,17 @@ class PostsController < ApplicationController
     # end
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:author_id, :title, :content, :file)
+      params.require(:post).permit(:title, :content, :file)
     end
 
     def set_author
       @authors = Author.all
     end
 
+    def correct_user
+      @post = Post.find_by(id: params[:id])
+      unless current_user?(@post.author)
+        redirect_to author_path(current_user)
+      end
+    end
 end

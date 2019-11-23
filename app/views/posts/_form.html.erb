@@ -12,10 +12,10 @@
   <% end %>
 
 
-    <div class="dropdown">
+    <!-- <div class="dropdown">
       <%#= form.collection_select :author_id, @authors, :id, :first_name,{}, class: "form-control"  %>
-      <%= form.select :author_id, Author.pluck(:last_name, :id ),{}, class: "form-control" %>
-    </div>
+      <%= form.select :author_id, Author.pluck(:current_user, :id ),{}, class: "form-control" %>
+    </div> -->
 
     <div class="field">
       <%= form.label :'Title:' %>
