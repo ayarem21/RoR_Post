@@ -41,7 +41,8 @@
   <% end %>
   <% @post.comments.each do |comment| %>
     <div class="alert alert-light">
-      <p><strong><%=Author.find_by_id(comment.author_id).first_name %></strong>: <%= comment.body %></p>
+      <p title="<%= comment.created_at%>"><strong><%=Author.find_by_id(comment.author_id).first_name %></strong>: <%= comment.body %></p>
+      <strong>It was created <%= distance_of_time_in_words(Time.now.hour, Time.now-comment.created_at) %> ago.<strong>
       <%= link_to 'Edit', edit_post_comments_path(@post, comment) %>
     </div>
   <% end %>
