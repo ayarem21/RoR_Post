@@ -36,10 +36,13 @@
   <br>
 
   <h3>All comments</h3>
+  <% if Comment.count == 0 %>
+    <label>There are no comments yet, you can be the first.</label>
+  <% end %>
   <% @post.comments.each do |comment| %>
     <div class="alert alert-light">
-      <p><strong><%= comment.username %></strong>: <%= comment.body %>
-      </p>
+      <p><strong><%=Author.find_by_id(comment.author_id).first_name %></strong>: <%= comment.body %></p>
+      <%= link_to 'Edit', edit_post_comments_path(@post, comment) %>
     </div>
   <% end %>
 
@@ -48,22 +51,21 @@
   <br>
 
   <h3>Add comments</h3>
-  <%= form_for([@post, @post.comments.build]) do |form| %>
+  <!-- please login or register to post a comment. -->
 
-    <div class="field">
-      <%= form.label :Username %>
-      <%= form.text_field :username, class:"form-control" %>
-    </div>
+  <% if current_user %>
+    <%= form_for([@post, @post.comments.build]) do |form| %>
 
-    <div class="field">
-      <%= form.label :'Text of comment' %>
-      <%= form.text_area :body, class:"form-control" %>
-    </div>
-    <br>
-    <div class="actions">
-      <%= form.submit :'Add Comment', class:"btn btn-warning"%>
-    </div>
-    <br>
-</div>
-
-<% end %>
+      <div class="field">
+        <%= form.label :'Text of comment' %>
+        <%= form.text_area :body, class:"form-control" %>
+      </div>
+      <br>
+      <div class="actions">
+        <%= form.submit :'Add Comment', class:"btn btn-warning"%>
+      </div>
+      <br>
+      <% end %>
+      <% else %>
+        <label>Please login or register to post a comment.</label>
+  <% end %>
