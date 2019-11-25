@@ -5,4 +5,9 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_one_attached :file
   is_impressionable counter_cache: true
+
+  def self.search(search)
+    where("title LIKE ? OR content LIKE ?", "%#{search}%","%#{search}%")
+  end
+
 end

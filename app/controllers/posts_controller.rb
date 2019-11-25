@@ -5,7 +5,11 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all.order('updated_at').reverse
+    if params[:search]
+      @posts = Post.search(params[:search]).order('updated_at').reverse
+    else
+      @posts = Post.all.order('updated_at').reverse
+    end
   end
 
   # GET /posts/1
