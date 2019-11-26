@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def create
     @post = Post.find(params[:post_id])
@@ -16,9 +17,8 @@ class CommentsController < ApplicationController
   end
 
  def update
-   @comment = Comment.find(params[:id])
+   @comment = Comment.find(params[:format])
    @post = Post.find(params[:post_id])
-   
    respond_to do |format|
      if @comment.update(comment_params)
        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
@@ -30,9 +30,17 @@ class CommentsController < ApplicationController
    end
   end
 
+
   private
 
   def comment_params
-    params.require(:comment).permit(:body)
+    params.require(:comment).permit(:body, :author_id)
+  end
+
+  def correct_user
+    @comment = Post.find(params[:post_id])
+    unless current_user
+      redirect_to root_path(current_user)
+    end
   end
 end

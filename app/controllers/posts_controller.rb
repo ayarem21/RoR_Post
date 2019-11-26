@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  impressionist actions: [:show], unique: [:session_hash]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: %i[:edit :update :destroy]
 
@@ -90,6 +91,14 @@ class PostsController < ApplicationController
       @post = Post.find_by(id: params[:id])
       unless current_user?(@post.author)
         redirect_to author_path(current_user)
+      end
+    end
+
+    def actions_check
+      if cookies[:actions]
+        cookies[:actions] = cookies[:actions].to_i + 1
+      else
+        cookies[:actions] = 0
       end
     end
 end

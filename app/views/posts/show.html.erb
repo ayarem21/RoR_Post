@@ -31,42 +31,42 @@
   <%= link_to 'Edit', edit_post_path(@post), class:"btn btn-warning"%>
   <%= link_to 'Back', posts_path, class:"btn btn-secondary"%>
 
-  <br>
-  <br>
-  <br>
 
+  <br>
+  <br>
+  <br>
   <h3>All comments</h3>
-  <% if Comment.count == 0 %>
-    <label>There are no comments yet, you can be the first.</label>
-  <% end %>
-  <% @post.comments.each do |comment| %>
-    <div class="alert alert-secondary">
-      <p title="<%= comment.created_at%>"><strong><%=Author.find_by_id(comment.author_id).first_name %></strong>: <%= comment.body %></p>
-      <strong>It was created <%= distance_of_time_in_words(Time.now.hour, Time.now-comment.created_at) %> ago.<strong>
-      <%= link_to 'Edit', edit_post_comments_path(@post, comment) %>
-    </div>
-  <% end %>
-
-  <br>
-  <br>
-  <br>
-
-  <h3>Add comments</h3>
-  <!-- please login or register to post a comment. -->
-
-  <% if current_user %>
-    <%= form_for([@post, @post.comments.build]) do |form| %>
-
-      <div class="field">
-        <%= form.label :'Text of comment' %>
-        <%= form.text_area :body, class:"form-control" %>
+    <% if Comment.count == 0 %>
+      <label>There are no comments yet, you can be the first.</label>
+    <% end %>
+    <% @post.comments.each do |comment| %>
+      <div class="alert alert-secondary">
+        <p title="<%= comment.created_at%>"><strong><%=Author.find_by_id(comment.author_id).first_name %></strong>: <%= comment.body %></p>
+        <strong>It was created <%= distance_of_time_in_words(Time.now.hour, Time.now-comment.created_at) %> ago.<strong>
+        <%= link_to 'Edit', edit_post_comments_path(@post, comment) %>
       </div>
-      <br>
-      <div class="actions">
-        <%= form.submit :'Add Comment', class:"btn btn-warning"%>
-      </div>
-      <br>
-      <% end %>
-      <% else %>
-        <label>Please login or register to post a comment.</label>
-  <% end %>
+    <% end %>
+
+    <br>
+    <br>
+    <br>
+
+    <h3>Add comments</h3>
+    <!-- please login or register to post a comment. -->
+
+    <% if current_user %>
+      <%= form_for([@post, @post.comments.build]) do |form| %>
+
+        <div class="field">
+          <%= form.label :'Text of comment' %>
+          <%= form.text_area :body, class:"form-control" %>
+        </div>
+        <br>
+        <div class="actions">
+          <%= form.submit :'Add Comment', class:"btn btn-warning"%>
+        </div>
+        <br>
+        <% end %>
+        <% else %>
+          <label>Please login or register to post a comment.</label>
+    <% end %>
