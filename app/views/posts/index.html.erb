@@ -1,16 +1,19 @@
 <p id="notice"><%= notice %></p>
 
 <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
-  <%= submit_tag "Search" %>
+<div class="row">
+  <div class="col-md-10">
+  <%= text_field_tag :search, params[:search], placeholder: "Search Posts", class:"form-control" %>
+   </div>
+   <div class="col-md-2">
+  <%= submit_tag "Search", class:"btn btn-primary mb-2 form-control"%>
+</div>
+</div>
 <% end %>
 
-<div class="alert alert-primary">
-  <h1>Posts</h1>
-</div>
 
   <% @posts.each do |post| %>
-  <div class="container, alert alert-secondary">
+  <div class="container alert alert-light">
   <div class="list group-item">
     <div>
       <i class="fas fa-address-book"></i>
@@ -39,8 +42,9 @@
       <div><%= link_to 'Show', post, class:"btn btn-outline-success" %>
         <% if current_user && current_user.id == post.author_id %>
         <%= link_to 'Edit', edit_post_path(post), class:"btn btn-outline-warning"%>
-        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger"%></div>
+        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger"%>
         <% end %>
+      </div>
     </div>
   </div>
   </div>

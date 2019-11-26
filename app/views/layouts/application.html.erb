@@ -2,8 +2,8 @@
 <html>
 <script src="https://kit.fontawesome.com/cea9c7549d.js" crossorigin="anonymous"></script>
   <head>
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
-      <i class="fab fa-accessible-icon" style="color:white"></i>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <i class="fab fa-accessible-icon" style="color:black"></i>
       <a class="navbar-brand" href="http://localhost:3000">Blog</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb" aria-expanded="true">
         <span class="navbar-toggler-icon"></span>
@@ -11,18 +11,18 @@
         <ul class="nav navbar-nav ml-auto">
           <% if current_user %>
             <li class="nav-item">
-              <a class="nav-link" href="#"><span class="fas fa-user"></span><%= current_user.email %>.</a>
+              <a class="nav-link" href="#" style="color:black"><span class="fas fa-user"></span><%= current_user.email %>.</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/logout"><span class="fas fa-sign-in-alt"></span>Logout</a>
+              <a class="nav-link" href="/logout" style="color:black"><span class="fas fa-sign-in-alt"></span>Logout</a>
             </li>
             <% else %>
 
             <li class="nav-item">
-              <a class="nav-link" href="/registration"><span class="fas fa-user"></span>Create account</a>
+              <a class="nav-link" href="/registration" style="color:black"><span class="fas fa-user"></span>Create account</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/login"><span class="fas fa-sign-in-alt"></span>Log in</a>
+              <a class="nav-link" href="/login" style="color:black"><span class="fas fa-sign-in-alt"></span>Log in</a>
             </li>
           <% end %>
         </ul>
@@ -41,7 +41,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class= "sp-3 mb-2 bg-secondary text-white">
     <div class="container">
       <%= yield %>
     </div>

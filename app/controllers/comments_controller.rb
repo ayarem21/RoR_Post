@@ -11,15 +11,23 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    @comment = Comment.find(params[:id])
     @post = Post.find(params[:post_id])
+    @comment = @post.author.comments.find(params[:id])
   end
 
  def update
-    @post = Post.find(params[:post_id])
-    @comment = Comment.find(params[:id])
-    @comment.update_attributes(params[:comment])
-    redirect_to @post
+   @comment = Comment.find(params[:id])
+   @post = Post.find(params[:post_id])
+   
+   respond_to do |format|
+     if @comment.update(comment_params)
+       format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+       format.json { render :show, status: :ok, location: @post }
+     else
+       format.html { render :edit }
+       format.json { render json: @post.errors, status: :unprocessable_entity }
+     end
+   end
   end
 
   private
