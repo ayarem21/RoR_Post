@@ -1,0 +1,20 @@
+
+
+<% if @post.comments.count == 0 %>
+  <label>There are no comments yet, you can be the first.</label>
+<% end %>
+
+
+  <div class="alert alert-secondary">
+    <p title="<%= comment.created_at%>"><strong><%=Author.find_by_id(comment.author_id).first_name %></strong>: <%= comment.body %>
+      <% if comment.created_at != comment.updated_at %>
+        <br>
+        Edited
+      <% end %>
+    </p>
+    <strong>It was created <%= distance_of_time_in_words(Time.now.hour, Time.now-comment.created_at) %> ago.</strong>
+      <% if current_user && current_user.id == comment.author_id && Time.now - comment.created_at < 60.minutes %>
+        <%= link_to 'Edit', edit_post_comment_path(@post, comment) %>
+      <% end %>
+      <%= link_to 'Reply',  new_post_comment_path(comment.post, parent_id: comment.id), class:'btn btn-outline-success' %>
+  </div>

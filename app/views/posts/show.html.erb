@@ -1,11 +1,15 @@
 <p id="notice"><%= notice %></p>
 
+<style>
+  .nested_comments {
+    margin-left: 30px;
+  }
+</style>
+
 <div class="container alert alert-light">
   <p>
     <strong>Name:</strong>
     <%= full_name(@post) %>
-    <%#= Author.find(@post.author_id).first_name %>
-    <%#= Author.find(@post.author_id).last_name %>
   </p>
 
   <p>
@@ -35,46 +39,9 @@
   <br>
   <br>
   <br>
-  <h3>All comments</h3>
-    <% if @post.comments.count == 0 %>
-      <label>There are no comments yet, you can be the first.</label>
-    <% end %>
-    <% @post.comments.each do |comment| %>
-      <div class="alert alert-secondary">
-        <p title="<%= comment.created_at%>"><strong><%=Author.find_by_id(comment.author_id).first_name %></strong>: <%= comment.body %>
-          <% if comment.created_at != comment.updated_at %>
-            <br>
-            Edited
-          <% end %>
-        </p>
-        <strong>It was created <%= distance_of_time_in_words(Time.now.hour, Time.now-comment.created_at) %> ago.<strong>
-          <% if current_user && current_user.id == comment.author_id && Time.now - comment.created_at < 60.minutes %>
-            <%= link_to 'Edit', edit_post_comment_path(@post, comment) %>
-          <% end %>
-      </div>
-    <% end %>
 
-    <br>
-    <br>
-    <br>
 
-    <h3>Add comments</h3>
-    <!-- please login or register to post a comment. -->
-
-    <% if current_user %>
-      <%= form_for([@post, @post.comments.build]) do |form| %>
-
-        <div class="field">
-          <%= form.label :'Text of comment' %>
-          <%= form.text_area :body, class:"form-control" %>
-        </div>
-        <br>
-        <div class="actions">
-          <%= form.submit :'Add Comment', class:"btn btn-warning"%>
-        </div>
-        <br>
-        <% end %>
-        <% else %>
-          <label>Please login or register to post a comment.</label>
-    <% end %>
 </div>
+<h3>All comments</h3>
+<%= nested_comments @post.comments.arrange(order: :created_at)  %>
+<%= render 'comments/form' %>

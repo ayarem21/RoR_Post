@@ -1,0 +1,20 @@
+<h3>Add comments</h3>
+<!-- please login or register to post a comment. -->
+
+<% if current_user %>
+  <%= form_for([@post, @post.comments.build]) do |form| %>
+
+    <div class="field">
+      <%= form.hidden_field :parent_id %>
+      <%= form.label :'Text of comment' %>
+      <%= form.text_area :body, class:"form-control" %>
+    </div>
+    <br>
+    <div class="actions">
+      <%= form.submit :'Add Comment', class:"btn btn-warning"%>
+    </div>
+    <br>
+  <% end %>
+<% else %>
+  <label>Please login or register to post a comment.</label>
+<% end %>

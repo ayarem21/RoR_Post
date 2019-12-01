@@ -1,5 +1,14 @@
 class CommentsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :find_post
+
+  def index
+    @post.comments = @post.comments.arrange(order: :created_at)
+  end
+
+  def new
+    @comment = Comment.new(parent_id: params[:parent_id])
+  end
 
   def create
     @post = Post.find(params[:post_id])
@@ -34,7 +43,12 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:body, :author_id)
+    params.require(:comment).permit(:body, :author_id, :parent_id)
+  end
+
+
+  def find_post
+    @post = Post.find(params[:post_id])
   end
 
   def correct_user
