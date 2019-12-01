@@ -10,6 +10,8 @@ gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 
+gem 'activeadmin'
+
 gem 'ancestry', '~> 3.0', '>= 3.0.7'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
