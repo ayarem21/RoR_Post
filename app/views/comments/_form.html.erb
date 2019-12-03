@@ -15,7 +15,7 @@
     <br>
   <% end %>
 <% else %>
-  <% if current_user.banned == false %>
+  <% if current_user == nil  || current_user.banned == false %>
     <label>Please login or register to post a comment.</label>
   <% else %>
     <label>You are banned, ahahah.</label>
