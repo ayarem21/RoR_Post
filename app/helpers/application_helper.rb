@@ -1,6 +1,6 @@
 module ApplicationHelper
   def cookie_index
-    cookies[:"actions"] % 5 == 0
+    cookies[:"actions"] == 0
   end
 
   def nested_comments(comments)

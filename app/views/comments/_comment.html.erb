@@ -9,11 +9,13 @@
         Edited
       <% end %>
     </p>
-    <% like_check = comment.likes.find { |like| like.author_id == current_user.id} %>
-      <% if like_check %>
-        <%= button_to 'DownVote', post_comment_like_path(@post, comment, like_check), method: :delete, class: "btn btn-danger" %>
-      <% else %>
-        <%= button_to 'UpVote', post_comment_likes_path(@post, comment), method: :post, class: "btn btn-success" %>
+    <% if current_user %>
+      <% like_check = comment.likes.find { |like| like.author_id == current_user.id} %>
+        <% if like_check %>
+          <%= button_to 'DownVote', post_comment_like_path(@post, comment, like_check), method: :delete, class: "btn btn-danger" %>
+        <% else %>
+          <%= button_to 'UpVote', post_comment_likes_path(@post, comment), method: :post, class: "btn btn-success" %>
+        <% end %>
       <% end %>
     <i><%= comment.likes.count %> <%= (comment.likes.count) == 1 ? 'Like' : 'Likes'%></i>
     <strong>It was created <%= distance_of_time_in_words(Time.now.hour, Time.now-comment.created_at) %> ago.</strong>
