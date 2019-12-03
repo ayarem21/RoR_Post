@@ -1,9 +1,6 @@
-
-
 <% if @post.comments.count == 0 %>
   <label>There are no comments yet, you can be the first.</label>
 <% end %>
-
 
   <div class="alert alert-secondary">
     <p title="<%= comment.created_at%>"><strong><%=Author.find_by_id(comment.author_id).first_name %></strong>: <%= comment.body %>
@@ -12,6 +9,13 @@
         Edited
       <% end %>
     </p>
+    <% like_check = comment.likes.find { |like| like.author_id == current_user.id} %>
+      <% if like_check %>
+        <%= button_to 'DownVote', post_comment_like_path(@post, comment, like_check), method: :delete, class: "btn btn-danger" %>
+      <% else %>
+        <%= button_to 'UpVote', post_comment_likes_path(@post, comment), method: :post, class: "btn btn-success" %>
+      <% end %>
+    <i><%= comment.likes.count %> <%= (comment.likes.count) == 1 ? 'Like' : 'Likes'%></i>
     <strong>It was created <%= distance_of_time_in_words(Time.now.hour, Time.now-comment.created_at) %> ago.</strong>
       <% if current_user && current_user.id == comment.author_id && Time.now - comment.created_at < 60.minutes %>
         <%= link_to 'Edit', edit_post_comment_path(@post, comment) %>
