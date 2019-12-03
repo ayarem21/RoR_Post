@@ -1,9 +1,8 @@
 <h3>Add comments</h3>
 <!-- please login or register to post a comment. -->
 
-<% if current_user %>
+<% if current_user && current_user.banned == false %>
   <%= form_for([@post, @post.comments.build]) do |form| %>
-
     <div class="field">
       <%= form.hidden_field :parent_id %>
       <%= form.label :'Text of comment' %>
@@ -16,5 +15,9 @@
     <br>
   <% end %>
 <% else %>
-  <label>Please login or register to post a comment.</label>
+  <% if current_user.banned == false %>
+    <label>Please login or register to post a comment.</label>
+  <% else %>
+    <label>You are banned, ahahah.</label>
+    <% end %>
 <% end %>

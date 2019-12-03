@@ -9,12 +9,12 @@
         Edited
       <% end %>
     </p>
-    <% if current_user %>
+    <% if current_user && current_user.banned == false %>
       <% like_check = comment.likes.find { |like| like.author_id == current_user.id} %>
         <% if like_check %>
-          <%= button_to 'DownVote', post_comment_like_path(@post, comment, like_check), method: :delete, class: "btn btn-danger" %>
+          <%= button_to 'Dislike', post_comment_like_path(@post, comment, like_check), method: :delete, class: "btn btn-danger" %>
         <% else %>
-          <%= button_to 'UpVote', post_comment_likes_path(@post, comment), method: :post, class: "btn btn-success" %>
+          <%= button_to 'Like', post_comment_likes_path(@post, comment), method: :post, class: "btn btn-success" %>
         <% end %>
       <% end %>
     <i><%= comment.likes.count %> <%= (comment.likes.count) == 1 ? 'Like' : 'Likes'%></i>
@@ -22,5 +22,7 @@
       <% if current_user && current_user.id == comment.author_id && Time.now - comment.created_at < 60.minutes %>
         <%= link_to 'Edit', edit_post_comment_path(@post, comment) %>
       <% end %>
-      <%= link_to 'Reply',  new_post_comment_path(comment.post, parent_id: comment.id), class:'btn btn-outline-success' %>
+      <% if current_user.banned == false %>
+        <%= link_to 'Reply',  new_post_comment_path(comment.post, parent_id: comment.id), class:'btn btn-outline-success' %>
+      <% end %>
   </div>

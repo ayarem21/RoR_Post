@@ -40,7 +40,7 @@
 
     <div>
       <div><%= link_to 'Show', post, class:"btn btn-outline-success" %>
-        <% if current_user && current_user.id == post.author_id %>
+        <% if current_user && current_user.id == post.author_id  && current_user.banned == false%>
         <%= link_to 'Edit', edit_post_path(post), class:"btn btn-outline-warning"%>
         <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger"%>
         <% end %>
@@ -50,7 +50,7 @@
   </div>
     <% end %>
 
-  <% if current_user %>
+  <% if current_user  && current_user.banned == false%>
     <div><%= link_to 'New post', new_post_path, class: "btn btn-primary"%></div>
   <% end %>
 
