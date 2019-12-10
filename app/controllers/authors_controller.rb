@@ -7,6 +7,7 @@ class AuthorsController < ApplicationController
   def create
     @author = Author.new(author_params)
     if @author.save
+      UserMailer.welcome_email(@author).deliver
       session[:user_id] = @author.id
       redirect_to '/posts'
       flash[:info] = "Welcome"

@@ -2,7 +2,7 @@
 <!-- please login or register to post a comment. -->
 
 <% if current_user && current_user.banned == false %>
-  <%= form_for([@post, @post.comments.build]) do |form| %>
+  <%= form_for ([@post, @post.comments.build]), remote:true do |form|%>
     <div class="field">
       <%= form.hidden_field :parent_id %>
       <%= form.label :'Text of comment' %>

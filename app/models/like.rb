@@ -1,4 +1,4 @@
 class Like < ApplicationRecord
-  belongs_to :comment
+  belongs_to :comment, dependent: :destroy
   belongs_to :author
 end

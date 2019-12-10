@@ -45,5 +45,7 @@
 
 </div>
 <h3>All comments</h3>
+<div class = "com">
 <%= nested_comments @post.comments.arrange(order: :created_at)  %>
+</div>
 <%= render 'comments/form' %>

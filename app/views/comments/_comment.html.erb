@@ -20,7 +20,7 @@
     <i><%= comment.likes.count %> <%= (comment.likes.count) == 1 ? 'Like' : 'Likes'%></i>
     <strong>It was created <%= distance_of_time_in_words(Time.now.hour, Time.now-comment.created_at) %> ago.</strong>
       <% if current_user && current_user.id == comment.author_id && Time.now - comment.created_at < 60.minutes %>
-        <%= link_to 'Edit', edit_post_comment_path(@post, comment) %>
+        <%= link_to 'Edit', edit_post_comment_path(@post, comment), remote: true %>
 
       <% end %>
     <% if current_user && current_user.banned == false %>
