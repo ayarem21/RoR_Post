@@ -19,4 +19,10 @@ Rails.application.routes.draw do
 
   resources :authors
   resources :sessions, only: [:new, :create, :destroy]
+
+  resources :authors do
+    member do
+      get :confirm_email
+    end
+  end
 end
