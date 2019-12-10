@@ -25,4 +25,7 @@ Rails.application.routes.draw do
       get :confirm_email
     end
   end
+
+  get 'pass_reset/new'
+  resources :pass_reset
 end

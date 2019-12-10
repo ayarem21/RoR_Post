@@ -14,6 +14,13 @@ class Author < ApplicationRecord
     save!(:validate => false)
   end
 
+  def password_reset
+    confirmation_token
+    self.pass_time = Time.zone.now
+    save!
+    UserMailer.pass_reset(self).deliver!
+  end
+
   private
 
   def email_validation

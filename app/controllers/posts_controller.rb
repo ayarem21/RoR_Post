@@ -6,10 +6,13 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    @posts = Post.all.order('created_at DESC').paginate(page: params[:page], per_page: 8)
     if params[:search]
-      @posts = Post.search(params[:search]).order('updated_at').reverse
+      @posts = Post.search(params[:search]).order('updated_at').paginate(page: params[:page], per_page: 8)
     else
-      @posts = Post.all.order('updated_at').reverse
+
+      @posts = Post.all.order('updated_at').paginate(page: params[:page], per_page: 8)
+      #@posts = Post.paginate(page: params[:page])
     end
   end
 
