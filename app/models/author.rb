@@ -25,7 +25,7 @@ class Author < ApplicationRecord
 
   def email_validation
   unless email.include?('@')
-    errors.add(:email, "Youe enter invalid email")
+    errors.add(:email, "You enter invalid email")
   end
 end
 
