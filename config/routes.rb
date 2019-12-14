@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
 
- # get '/posts/:post_id/comments/:id/edit' as: 'edit_post_comments'
-
   root 'posts#index', as: :authenticated_root
   resources :posts do
     resources :comments do

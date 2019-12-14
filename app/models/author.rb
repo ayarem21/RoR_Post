@@ -1,9 +1,13 @@
 class Author < ApplicationRecord
   has_secure_password
+
   before_create :confirmation_token
   after_create :send_confirmation
+
   validates :email, presence: true, uniqueness: true
   validate :email_validation
+  validates :password, presence: true, length: { minimum: 8 }
+
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -17,17 +21,17 @@ class Author < ApplicationRecord
   def password_reset
     confirmation_token
     self.pass_time = Time.zone.now
-    save!
+    save!(:validate => false)
     UserMailer.pass_reset(self).deliver!
   end
 
   private
 
   def email_validation
-  unless email.include?('@')
-    errors.add(:email, "You enter invalid email")
+    unless email.include?('@')
+      errors.add(:email, "You enter invalid email")
+    end
   end
-end
 
   #def password_validation
   #  unless  password.count("a-z") > 0 && password.count("A-Z") > 0 && password.count((0-9).to_s) > 0
