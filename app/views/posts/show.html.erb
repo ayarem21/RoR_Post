@@ -7,45 +7,45 @@
 </style>
 
 <div class="container alert alert-light">
-  <p>
-    <strong>Name:</strong>
-    <%= full_name(@post) %>
-  </p>
+
+  <h1 class="mt-4"><%= @post.title %></h1>
 
   <p>
-    <strong>Title:</strong>
-    <%= @post.title %>
+    by <%= full_name(@post) %>
   </p>
 
+  <hr>
+
+  <strong>It was created <%= distance_of_time_in_words(Time.now.hour, Time.now-@post.created_at) %> ago.</strong>
+
+  <hr>
+
   <p>
-    <strong>Content:</strong>
+    <%= image_tag @post.file, width: '75%'%>
+  </p>
+
+  <hr>
+
+  <p>
     <%= @post.content %>
   </p>
 
-  <p>
-    <strong>Image:</strong>
-    <p><%= image_tag @post.file, width: '75%'%>
-    </p>
-  </p>
-
-
-  <p>
-    <strong>It was created <%= distance_of_time_in_words(Time.now.hour, Time.now-@post.created_at) %> ago.<strong>
-  </p>
   <% if current_user && current_user.id == @post.author_id%>
-    <%= link_to 'Edit', edit_post_path(@post), class:"btn btn-warning"%>
+    <%= link_to 'Edit', edit_post_path(@post), class:"btn btn-info"%>
   <% end %>
+
   <%= link_to 'Back', posts_path, class:"btn btn-secondary"%>
 
-
   <br>
   <br>
   <br>
-
 
 </div>
+
 <h3>All comments</h3>
+
 <div class = "com">
-<%= nested_comments @post.comments.arrange(order: :created_at)  %>
+  <%= nested_comments @post.comments.arrange(order: :created_at)  %>
 </div>
+
 <%= render 'comments/form' %>

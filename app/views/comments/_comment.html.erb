@@ -4,25 +4,30 @@
 
   <div class="alert alert-secondary">
     <p title="<%= comment.created_at%>"><strong><%=Author.find_by_id(comment.author_id).first_name %></strong>: <%= comment.body %>
+
       <% if comment.created_at != comment.updated_at %>
         <br>
         Edited
       <% end %>
     </p>
+
     <% if current_user && current_user.banned == false %>
       <% like_check = comment.likes.find { |like| like.author_id == current_user.id} %>
-        <% if like_check %>
-          <%= button_to 'Dislike', post_comment_like_path(@post, comment, like_check), method: :delete, class: "btn btn-danger" %>
-        <% else %>
-          <%= button_to 'Like', post_comment_likes_path(@post, comment), method: :post, class: "btn btn-success" %>
-        <% end %>
-    <% end %>
-    <i><%= comment.likes.count %> <%= (comment.likes.count) == 1 ? 'Like' : 'Likes'%></i>
-    <strong>It was created <%= distance_of_time_in_words(Time.now.hour, Time.now-comment.created_at) %> ago.</strong>
-      <% if current_user && current_user.id == comment.author_id && Time.now - comment.created_at < 60.minutes %>
-        <%= link_to 'Edit', edit_post_comment_path(@post, comment), remote: true %>
-
+      <% if like_check %>
+        <%= button_to 'Dislike', post_comment_like_path(@post, comment, like_check), method: :delete, class: "btn btn-danger" %>
+      <% else %>
+        <%= button_to 'Like', post_comment_likes_path(@post, comment), method: :post, class: "btn btn-success" %>
       <% end %>
+    <% end %>
+
+    <i><%= comment.likes.count %> <%= (comment.likes.count) == 1 ? 'Like' : 'Likes'%></i>
+
+    <strong>It was created <%= distance_of_time_in_words(Time.now.hour, Time.now-comment.created_at) %> ago.</strong>
+
+    <% if current_user && current_user.id == comment.author_id && Time.now - comment.created_at < 60.minutes %>
+      <%= link_to 'Edit', edit_post_comment_path(@post, comment), remote: true %>
+    <% end %>
+
     <% if current_user && current_user.banned == false %>
         <%= link_to 'Reply',  new_post_comment_path(comment.post, parent_id: comment.id), class:'btn btn-outline-success' %>
     <% end %>

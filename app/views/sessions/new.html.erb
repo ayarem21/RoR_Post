@@ -1,19 +1,15 @@
-<p id=”alert”><%= alert %></p>
-<div class="container w-50 p-3">
-<h1>Login</h1>
+<div class="container alert alert-light">
+  <h1 class="mt-4">Login</h1>
 
-<%= form_for(:session, url: sessions_path) do |f| %>
+  <%= form_for(:session, url: sessions_path) do |f| %>
 
-    <%= f.label :email%>
-    <%= f.text_field :email, class: 'form-control'%>
+      <%= f.label :email%>
+      <%= f.text_field :email, class: 'form-control'%>
 
-    <%= f.label :password%>
-    <%= f.password_field :password, class: 'form-control'%>
-
-  <br>
-
-    <%= f.submit 'Login', class: "btn btn-primary" %>
-
-<% end %>
+      <%= f.label :password%>
+      <%= f.password_field :password, class: 'form-control'%>
+      <br>
+      <%= f.submit 'Login', class: "btn btn-primary" %>
+  <% end %>
   <p><%= link_to "Forgot your password??", new_pass_reset_path %></p>
 </div>

@@ -1,7 +1,6 @@
-<div class="container w-50 p-3">
-
+<div class="container alert alert-light">
     <%= form_for(@author) do |f| %>
-
+      <h1 class="mt-4">Registration</h1>
       <%= f.label :"Firs name:" %>
       <%= f.text_field :first_name, class: 'form-control' %>
 
@@ -13,6 +12,7 @@
 
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
+      <p>(Must contain minimum 8 symbols)</p>
       <br>
       <%= f.submit "Create my account", class: "btn btn-primary" %>
 

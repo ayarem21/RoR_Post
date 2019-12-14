@@ -9,9 +9,9 @@ class AuthorsController < ApplicationController
     if @author.save
       session[:user_id] = @author.id
       redirect_to '/posts'
-      flash[:info] = "Welcome"
+      flash[:success] = "Welcome"
     else
-      flash[:info] = 'Invalid Email or password'
+      flash[:error] = 'Invalid Email or Password'
       redirect_to '/registration'
     end
   end
@@ -20,7 +20,7 @@ class AuthorsController < ApplicationController
     author = Author.find_by_confirm_token(params[:id])
     if author
       author.email_activate
-      flash[:success] = "Welcome to the Sample App! Your email has been confirmed.
+      flash[:success] = "Welcome to the Blog! Your email has been confirmed.
       Please sign in to continue."
       redirect_to login_path
     else

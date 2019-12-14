@@ -1,17 +1,3 @@
-<%#= form_for([@post, @comment]) do |form| %>
-
-<!--  <div class="field">-->
-    <%#= form.hidden_field :parent_id %>
-    <%#= form.label :'Text of comment' %>
-    <%#= form.text_area :body, class:"form-control" %>
-<!--  </div>-->
-<!--  <br>-->
-<!--  <div class="actions">-->
-    <%#= form.submit :'Add Comment', class:"btn btn-warning"%>
-<!--  </div>-->
-<!--  <br>-->
-<%# end %>
-
 <%= form_with(model: [ @post, @post.comments.build ], local: true) do |f| %>
   <%= f.hidden_field :parent_id, value: params[:parent_id] %>
   <div class="form-group row">
