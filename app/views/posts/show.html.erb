@@ -44,7 +44,7 @@
 
 <h3>All comments</h3>
 
-<div class = "com">
+<div class="new_comment" id="new_comment">
   <%= nested_comments @post.comments.arrange(order: :created_at)  %>
 </div>
 

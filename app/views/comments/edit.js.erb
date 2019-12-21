@@ -1,1 +1,2 @@
-//$(".com").after('<%= j render('edit', comment: @comment) %>');
+$("#comment-<%=@comment.id %>").hide(250)
+$("#comment-<%=@comment.id %>").after('<%= j render('comments/edit', comment: @comment, ) %>');

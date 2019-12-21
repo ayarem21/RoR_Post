@@ -1,23 +1,46 @@
-<h3>Add comments</h3>
-<!-- please login or register to post a comment. -->
+<!--<div class="container new_comment_form">-->
+<!--  <div class="coments" id="form_new">-->
+<!--    <h3>Add comments</h3>-->
 
-<% if current_user && current_user.banned == false %>
-  <%= form_for ([@post, @post.comments.build]), remote:true do |form|%>
-    <div class="field">
-      <%= form.hidden_field :parent_id %>
-      <%= form.label :'Text of comment' %>
-      <%= form.text_area :body, class:"form-control" %>
-    </div>
-    <br>
-    <div class="actions">
-      <%= form.submit :'Add Comment', class:"btn btn-info"%>
-    </div>
-    <br>
-  <% end %>
-<% else %>
-  <% if current_user == nil  || current_user.banned == false %>
-    <label>Please login or register to post a comment.</label>
-  <% else %>
-    <label>You are banned, ahahah.</label>
-  <% end %>
-<% end %>
+    <%# if current_user && current_user.banned == false %>
+      <%#= form_for ([@post, @post.comments.build]), remote:true do |form|%>
+<!--        <div class="field">-->
+          <%#= form.hidden_field :parent_id %>
+          <%#= form.label :'Text of comment' %>
+          <%#= form.text_area :body, class:"form-control" %>
+<!--        </div>-->
+<!--        <br>-->
+<!--        <div class="actions">-->
+          <%#= form.submit :'Add Comment', class:"btn btn-info"%>
+<!--        </div>-->
+<!--        <br>-->
+      <%# end %>
+    <%# else %>
+      <%# if current_user == nil  || current_user.banned == false %>
+<!--        <label>Please login or register to post a comment.</label>-->
+      <%# else %>
+<!--        <label>You are banned, ahahah.</label>-->
+      <%# end %>
+    <%# end %>
+<!--  </div>-->
+<!--</div>-->
+
+
+<div class="container new_comment_form">
+  <div class="coments" id="form_new">
+        <div id="form_comment">
+          <h3>Add comment:</h3>
+          <%= form_with(model: [ @post, @post.comments.build ]) do |form| %>
+            <!--# ancestry-->
+            <%= form.hidden_field :parent_id %>
+            <p>
+              <%= form.label :comment %><br>
+              <%= form.text_area :body, class:'form-control' %>
+            </p>
+            <p>
+              <%= form.submit class:'btn btn btn-primary btn-lg ' %>
+            </p>
+          <% end %>
+        </div>
+  </div>
+</div>
