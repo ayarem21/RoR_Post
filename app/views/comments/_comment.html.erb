@@ -29,11 +29,11 @@
     <strong>It was created <%= distance_of_time_in_words(Time.now.hour, Time.now-comment.created_at) %> ago.</strong>
 
     <% if current_user && current_user.id == comment.author_id && Time.now - comment.created_at < 60.minutes %>
-      <%= link_to 'Edit', edit_post_comment_path(@post, comment), remote: true %>
+      <%= link_to 'Edit', edit_post_comment_path(@post, comment), remote: true, class:'btn btn-outline-primary' %>
     <% end %>
 
     <% if current_user && current_user.banned == false %>
-        <%= link_to 'Reply',  new_post_comment_path(comment.post, parent_id: comment.id, js: true), remote:true, class:'btn btn-outline-success' %>heroku
+        <%= link_to 'Reply', new_post_comment_path(comment.post, parent_id: comment.id, js: true), remote:true, class:'btn btn-outline-success' %>
     <% end %>
   </div>
 </div>
