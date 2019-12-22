@@ -28,24 +28,15 @@ class Author < ApplicationRecord
   private
 
   def email_validation
-    unless email.include?('@')
-      errors.add(:email, "You enter invalid email")
-    end
+    errors.add(:email, "You enter invalid email") unless email.include?('@')
   end
 
-  #def password_validation
-  #  unless  password.count("a-z") > 0 && password.count("A-Z") > 0 && password.count((0-9).to_s) > 0
-  #    errors.add(:password, "must contain 1 small letter, 1 capital letter and number")
-  #  end
-  #end
 
   def send_confirmation
     UserMailer.welcome_email(self).deliver!
   end
 
   def confirmation_token
-    if self.confirm_token.blank?
-      self.confirm_token = SecureRandom.urlsafe_base64.to_s
-    end
+    self.confirm_token = SecureRandom.urlsafe_base64.to_s if self.confirm_token.blank?
   end
 end

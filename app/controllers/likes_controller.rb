@@ -28,8 +28,6 @@ class LikesController < ApplicationController
     @comment = Comment.find(params[:comment_id])
   end
 
-
-
   def already_liked?
     Like.where(author_id: current_user.id, comment_id: params[:comment_id]).exists?
   end

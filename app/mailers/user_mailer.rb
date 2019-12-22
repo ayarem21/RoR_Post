@@ -10,6 +10,4 @@ class UserMailer < ApplicationMailer
     @author = author
     mail(to: author.email, subject: "Password Reset")
   end
-
-
 end

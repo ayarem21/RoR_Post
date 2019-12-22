@@ -9,7 +9,7 @@ class AuthorsController < ApplicationController
     if @author.save
       session[:user_id] = @author.id
       redirect_to '/posts'
-      flash[:success] = "Welcome"
+      flash[:success] = "Welcome! We sent an letter to your email, activate your account!"
     else
       flash[:error] = 'Invalid Email or Password'
       redirect_to '/registration'

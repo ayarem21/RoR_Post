@@ -10,9 +10,7 @@ class PostsController < ApplicationController
     if params[:search]
       @posts = Post.search(params[:search]).order('updated_at').paginate(page: params[:page], per_page: 8)
     else
-
       @posts = Post.all.order('updated_at').paginate(page: params[:page], per_page: 8)
-      #@posts = Post.paginate(page: params[:page])
     end
   end
 

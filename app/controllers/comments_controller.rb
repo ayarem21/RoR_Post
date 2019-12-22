@@ -63,7 +63,6 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:body, :author_id, :post_id, :parent_id)
   end
 
-
   def find_post
     @post = Post.find(params[:post_id])
   end

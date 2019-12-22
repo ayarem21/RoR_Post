@@ -1,6 +1,7 @@
 <% if @post.comments.count == 0 %>
   <label>There are no comments yet, you can be the first.</label>
 <% end %>
+
 <div class="coments comment-<%= comment.id %>"  id="comment-<%= comment.id %>">
   <div class="alert alert-secondary">
     <p title="<%= comment.created_at%>"><strong><%=Author.find_by_id(comment.author_id).first_name %></strong>: <%= comment.body %>
@@ -11,32 +12,19 @@
       <% end %>
     </p>
 
-    <%# if current_user%>
-      <%# like_check = comment.likes.find { |like| like.author_id == current_user.id} %>
-    <%# end %>
-      <%# if current_user and like_check.nil? %>
-        <%#= link_to '↑', post_comment_likes_path(@post, comment),remote: true ,method: :post, class: 'badge badge-primary ' %>
-<!--        <strong> <%#= comment.likes.map(&:value).sum %> </strong>-->
-        <%#= link_to '↓', post_comment_destroy_path(@post, comment),remote: true,method: :post, class: 'badge badge-danger' %>
-        <%# else %>
-<!--        <span class="badge badge-light disabled">↑</span>-->
-<!--        <strong> <%#= comment.likes.map(&:value).sum %></strong>-->
-<!--        <span class="badge badge-light disabled">↓</span>-->
-      <%# end %>
     <% if current_user%>
       <% pre_like = comment.likes.find { |like| like.author_id == current_user.id} %>
     <% end %>
-    <% if current_user and pre_like.nil? and current_user.banned == false  %>
-      <%= link_to '↑', post_comment_likes_path(@post, comment),remote: true ,method: :post, class: 'badge badge-primary ' %>
-      <strong> <%= comment.likes.map(&:value).sum %> </strong>
-      <%= link_to '↓', post_comment_destroy_path(@post, comment),remote: true,method: :post, class: 'badge badge-danger' %>
-    <% else %>
-      <span class="badge badge-light disabled">↑</span>
-      <strong> <%= comment.likes.map(&:value).sum %></strong>
-      <span class="badge badge-light disabled">↓</span>
-    <% end %>
 
-<!--    <i><%#= comment.likes.count %> <%#= (comment.likes.count) == 1 ? 'Like' : 'Likes'%></i>-->
+    <% if current_user and pre_like.nil? and current_user.banned == false  %>
+      <%= link_to ' ', post_comment_likes_path(@post, comment),remote: true, method: :post, class: 'far fa-heart', style:"color: red"%>
+      <strong> <%= comment.likes.map(&:value).sum %> </strong>
+      <%= link_to ' ', post_comment_destroy_path(@post, comment),remote: true, method: :post, class: 'fas fa-heart-broken', style:"color: blue" %>
+    <% else %>
+      <span class="far fa-heart" style="color: gray"></span>
+      <strong> <%= comment.likes.map(&:value).sum %></strong>
+      <span class="fas fa-heart-broken" style="color: gray"></span>
+    <% end %>
 
     <strong>It was created <%= distance_of_time_in_words(Time.now.hour, Time.now-comment.created_at) %> ago.</strong>
 
@@ -45,10 +33,7 @@
     <% end %>
 
     <% if current_user && current_user.banned == false %>
-        <%= link_to 'Reply',  new_post_comment_path(comment.post, parent_id: comment.id, js: true), remote:true, class:'btn btn-outline-success' %>
-        <%= link_to 'Destroy Comment', [comment.post, comment], remote: true,
-                  method: :delete,
-                  data: { confirm: 'Are you sure?' }, class:'btn btn-sm btn-outline-secondary' %>
+        <%= link_to 'Reply',  new_post_comment_path(comment.post, parent_id: comment.id, js: true), remote:true, class:'btn btn-outline-success' %>heroku
     <% end %>
   </div>
 </div>
