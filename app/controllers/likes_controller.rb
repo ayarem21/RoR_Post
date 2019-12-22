@@ -2,23 +2,23 @@ class LikesController < ApplicationController
   before_action :find_comment
 
   def create
-    if already_liked?
-      flash[:notice] = "You can't like more than once"
-    else
-      @comment.likes.create(author_id: current_user.id)
+    respond_to do |format|
+      if @comment.likes.create!(author: current_user, value: 1)
+        format.js { render 'comments/like', status: :created, location: @post }
+      else
+        format.html { redirect_to @post, alert: "You can't like this twice" }
+      end
     end
-
-    redirect_to @post
   end
 
   def destroy
-    @like = @comment.likes.find(params[:id])
-    if !already_liked?
-      flash[:notice] = "Cannot unlike"
-    else
-      @like.destroy
+    respond_to do |format|
+      if @comment.likes.create!(author: current_user, value: -1)
+        format.js { render 'comments/like', status: :created, location: @post }
+      else
+        format.html { redirect_to @post, alert: "You can't dislike this twice" }
+      end
     end
-    redirect_to post_path(@post)
   end
 
   private
@@ -31,7 +31,6 @@ class LikesController < ApplicationController
 
 
   def already_liked?
-    Like.where(author_id: current_user.id, comment_id:
-        params[:comment_id]).exists?
+    Like.where(author_id: current_user.id, comment_id: params[:comment_id]).exists?
   end
 end
