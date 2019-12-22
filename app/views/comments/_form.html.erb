@@ -1,6 +1,7 @@
 <div class="container new_comment_form">
   <div class="coments" id="form_new">
     <div id="form_comment">
+      <% if current_user && current_user.banned == false %>
       <h3>Add comment:</h3>
       <%= form_with(model: [ @post, @post.comments.build ]) do |form| %>
         <%= form.hidden_field :parent_id %>
@@ -12,6 +13,7 @@
           <%= form.submit class:'btn btn btn-primary btn-lg ' %>
         </p>
       <% end %>
+        <% end %>
     </div>
   </div>
 </div>

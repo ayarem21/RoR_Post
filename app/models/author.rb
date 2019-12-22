@@ -4,9 +4,11 @@ class Author < ApplicationRecord
   before_create :confirmation_token
   after_create :send_confirmation
 
-  validates :email, presence: true, uniqueness: true
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
+  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
   validate :email_validation
-  validates :password, presence: true, length: { minimum: 8 }
+  #validates :password, presence: true, length: { minimum: 8 }
+  #disable validation, because active admin don't work
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
