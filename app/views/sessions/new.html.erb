@@ -2,14 +2,13 @@
   <h1 class="mt-4">Login</h1>
 
   <%= form_for(:session, url: sessions_path) do |f| %>
+    <%= f.label :email%>
+    <%= f.text_field :email, class: 'form-control'%>
 
-      <%= f.label :email%>
-      <%= f.text_field :email, class: 'form-control'%>
-
-      <%= f.label :password%>
-      <%= f.password_field :password, class: 'form-control'%>
-      <br>
-      <%= f.submit 'Login', class: "btn btn-primary" %>
+    <%= f.label :password%>
+    <%= f.password_field :password, class: 'form-control'%>
+    <br>
+    <%= f.submit 'Login', class: "btn btn-primary" %>
   <% end %>
   <hr>
   <p><%= link_to "Forgot your password??", new_pass_reset_path %></p>

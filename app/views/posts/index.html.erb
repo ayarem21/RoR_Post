@@ -3,57 +3,56 @@
 <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
 <div class="row">
   <div class="col-md-10">
-  <%= text_field_tag :search, params[:search], placeholder: "Search Posts", class:"form-control" %>
-   </div>
-   <div class="col-md-2">
-  <%= submit_tag "Search", class:"btn btn-primary mb-2 form-control"%>
-</div>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Posts", class:"form-control" %>
+  </div>
+  <div class="col-md-2">
+    <%= submit_tag "Search", class:"btn btn-primary mb-2 form-control"%>
+  </div>
 </div>
 <% end %>
 
 
-  <% @posts.each do |post| %>
+<% @posts.each do |post| %>
   <div class="container alert alert-light">
-  <div class="list group-item">
-    <div>
-      <i class="fas fa-address-book"></i>
-      <strong>Author:</strong>
-    </div>
-    <div><%= full_name(post) %> </div>
+    <div class="list group-item">
+      <div>
+        <i class="fas fa-address-book"></i>
+        <strong>Author:</strong>
+      </div>
 
+      <div><%= full_name(post) %> </div>
 
-    <div>
-      <i class="fab fa-accusoft"></i>
-      <strong>Title:</strong>
-    </div>
-    <div><%= post.title %></div>
+      <div>
+        <i class="fab fa-accusoft"></i>
+        <strong>Title:</strong>
+      </div>
+      <div><%= post.title %></div>
 
-    <div>
-      <i class="fab fa-adversal"></i>
-      <strong>Content:</strong>
-    </div>
-    <div><%= post.content %></div>
-    <div>
-      <div><i class="fas fa-binoculars"></i>
-      <%= post.impressions_count %></div>
-    </div>
-
-    <div>
-      <div><%= link_to 'Show', post, class:"btn btn-outline-success" %>
-        <% if current_user && current_user.id == post.author_id  && current_user.banned == false%>
-        <%= link_to 'Edit', edit_post_path(post), class:"btn btn-outline-warning"%>
-        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger"%>
-        <% end %>
+      <div>
+        <i class="fab fa-adversal"></i>
+        <strong>Content:</strong>
+      </div>
+      <div><%= post.content %></div>
+      <div>
+        <div><i class="fas fa-binoculars"></i>
+        <%= post.impressions_count %></div>
+      </div>
+      <div>
+        <div><%= link_to 'Show', post, class:"btn btn-outline-success" %>
+          <% if current_user && current_user.id == post.author_id  && current_user.banned == false%>
+          <%= link_to 'Edit', edit_post_path(post), class:"btn btn-outline-warning"%>
+          <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger"%>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-  </div>
-    <% end %>
+<% end %>
 
   <% if current_user  && current_user.banned == false%>
     <div><%= link_to 'New post', new_post_path, class: "btn btn-primary"%></div>
   <% end %>
 
 <%= will_paginate @posts %>
-<!-- -->
+
 <br>

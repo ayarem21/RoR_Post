@@ -1,7 +1,6 @@
 <div class="container reply_comment_form" id="reply_comment_form">
   <div class="col-md-8">
     <%= form_with(model: [ @post, @post.comments.build ]) do |form| %>
-      <!--# ancestry-->
       <%= form.hidden_field :parent_id, value: params[:parent_id] %>
       <p>
         <%= form.label :comment %><br>

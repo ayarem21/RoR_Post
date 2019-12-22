@@ -11,26 +11,21 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= form.label :'Title:' %>
+    <%= form.text_field :title, class:"form-control" %>
+  </div>
 
-    <!-- <div class="dropdown">
-      <%#= form.collection_select :author_id, @authors, :id, :first_name,{}, class: "form-control"  %>
+  <div class="field">
+    <%= form.label :'Content:' %>
+    <%= form.text_area :content, class:"form-control" %>
+  </div>
 
-    </div> -->
+  <div>
+    <%= form.file_field :file %>
+  </div>
 
-    <div class="field">
-      <%= form.label :'Title:' %>
-      <%= form.text_field :title, class:"form-control" %>
-    </div>
-
-    <div class="field">
-      <%= form.label :'Content:' %>
-      <%= form.text_area :content, class:"form-control" %>
-    </div>
-
-    <div>
-      <%= form.file_field :file %>
-    </div>
-    <br>
-    <%= form.submit :Submit, class:"btn btn-dark"%>
-    <br>
+  <br>
+  <%= form.submit :Submit, class:"btn btn-dark"%>
+  <br>
 <% end %>

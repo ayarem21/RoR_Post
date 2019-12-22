@@ -26,7 +26,6 @@
             </li>
           <% end %>
         </ul>
-
     </nav>
 
     <%= csrf_meta_tags %>
@@ -38,6 +37,7 @@
     <% if cookie_index and current_user == nil %>
       <script>alert('Please login or register!!');</script>
     <% end %>
+
   </head>
 
   <body class= "sp-3 mb-2 bg-secondary text-white">
